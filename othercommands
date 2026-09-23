@@ -1,0 +1,214 @@
+git clone https://github.com/Area-Turtle/devops-capstone-project.git
+cd devops-capstone-project
+bash ./bin/setup.sh
+exit
+
+https://github.com/Area-Turtle/devops-capstone-project/blob/main/README.md
+https://github.com/Area-Turtle/devops-capstone-project/blob/main/.github/ISSUE_TEMPLATE/user-story-template.md
+https://github.com/Area-Turtle/devops-capstone-project/blob/main/setup.cfg
+
+#CREATE
+(venv) theia:project$ curl -i -X POST http://127.0.0.1:5000/accounts \
+> -H "Content-Type: application/json" \
+> -d '{"name":"John Doe","email":"john@doe.com","address":"123 Main St.","phone_number":"555-1212"}'
+HTTP/1.1 201 CREATED
+Server: gunicorn
+Date: Tue, 22 Sep 2026 23:06:33 GMT
+Connection: close
+Content-Type: application/json
+Content-Length: 128
+Location: /
+
+{"address":"123 Main St.","date_joined":"2026-09-22","email":"john@doe.com","id":1,"name":"John Doe","phone_number":"555-1212"}
+
+#LIST/LISTALL
+(venv) theia:project$ curl -i -X GET http://127.0.0.1:5000/accounts
+HTTP/1.1 200 OK
+Server: gunicorn
+Date: Tue, 22 Sep 2026 23:07:07 GMT
+Connection: close
+Content-Type: application/json
+Content-Length: 130
+
+[{"address":"123 Main St.","date_joined":"2026-09-22","email":"john@doe.com","id":1,"name":"John Doe","phone_number":"555-1212"}]
+
+#READ
+(venv) theia:project$ curl -i -X GET http://127.0.0.1:5000/accounts/1
+HTTP/1.1 200 OK
+Server: gunicorn
+Date: Tue, 22 Sep 2026 23:07:50 GMT
+Connection: close
+Content-Type: application/json
+Content-Length: 128
+
+{"address":"123 Main St.","date_joined":"2026-09-22","email":"john@doe.com","id":1,"name":"John Doe","phone_number":"555-1212"}
+
+#UPDATE
+(venv) theia:project$ curl -i -X PUT http://127.0.0.1:5000/accounts/1 \
+> -H "Content-Type: application/json" \
+> -d '{"name":"John Doe","email":"john@doe.com","address":"123 Main St.","phone_number":"555-1111"}'
+HTTP/1.1 200 OK
+Server: gunicorn
+Date: Tue, 22 Sep 2026 23:08:28 GMT
+Connection: close
+Content-Type: application/json
+Content-Length: 128
+
+{"address":"123 Main St.","date_joined":"2026-09-22","email":"john@doe.com","id":1,"name":"John Doe","phone_number":"555-1111"}
+
+#DELETE
+(venv) theia:project$ curl -i -X DELETE http://127.0.0.1:5000/accounts/1
+HTTP/1.1 204 NO CONTENT
+Server: gunicorn
+Date: Tue, 22 Sep 2026 23:09:37 GMT
+Connection: close
+Content-Type: text/html; charset=utf-8
+
+https://github.com/Area-Turtle/devops-capstone-project.git
+
+(venv) theia:devops-capstone-project$ gh run view 35799956600 --verbose
+  
+✓ main CI Build · 35799956600
+Triggered via push about 2 minutes ago
+
+JOBS
+✓ build in 41s (ID 106987804020)
+  ✓ Set up job
+  ✓ Initialize containers
+  ✓ Checkout
+  ✓ Install dependencies
+  ✓ Lint with flake8
+  ✓ Post Checkout
+  ✓ Stop containers
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v2. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build: .github#2
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+build: .github#1
+
+
+For more information about the job, try: gh run view --job=106987804020
+View this run on GitHub: https://github.com/Area-Turtle/devops-capstone-project/actions/runs/35799956600
+
+(venv) theia:project$ curl -I localhost:5000
+
+HTTP/1.1 200 OK
+Server: gunicorn
+Date: Wed, 23 Sep 2026 00:34:06 GMT
+Connection: close
+Content-Type: application/json
+
+(venv) theia:project$ curl -I localhost:5000
+HTTP/1.1 302 FOUND
+Server: Werkzeug/2.1.2 Python/3.9.25
+Date: Wed, 23 Sep 2026 00:51:35 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 233
+Location: https://localhost:5000/
+Permissions-Policy: browsing-topics=()
+X-Frame-Options: SAMEORIGIN
+
+(venv) theia:devops-capstone-project$ curl -I localhost:5000
+HTTP/1.1 302 FOUND
+Server: Werkzeug/2.1.2 Python/3.9.25
+Date: Wed, 23 Sep 2026 01:08:14 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 233
+Location: https://localhost:5000/
+Access-Control-Allow-Origin: *
+Permissions-Policy: browsing-topics=()
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Content-Security-Policy: default-src 'self'; object-src 'none'
+Referrer-Policy: strict-origin-when-cross-origin
+Connection: close
+
+docker run --rm \
+    --link postgresql \
+    -p 8080:8080 \
+    -e DATABASE_URI=postgresql://postgres:postgres@postgresql:5432/postgres \
+    accounts
+
+
+X-Content-Type-Options: nosniff
+Content-Security-Policy: default-src 'self'; object-src 'none'
+Referrer-Policy: strict-origin-when-cross-origin
+Connection: close
+Content-Length: 52
+
+{"name":"Account REST API Service","version":"1.0"}
+
+docker tag accounts us.icr.io/sn-labs-zachary007/accounts:1
+docker push us.icr.io/sn-labs-zachary007/accounts:1
+
+oc create -f postgresql-ephemeral-template.json
+oc new-app postgresql-ephemeral
+oc get all
+
+oc create deployment accounts \
+  --image=us.icr.io/$SN_ICR_NAMESPACE/accounts:1 \
+  --replicas=3 \
+  --dry-run=client -o yaml > deploy/
+
+oc describe secret PostgreSQL
+
+oc create -f deploy/deployment.yaml
+
+https://accounts-sn-labs-zachary007.labs-prod-openshift-san-a45631dc5778dc6371c67d206ba9ae5c-0000.us-east.containers.appdomain.cloud/
+{"name":"Account REST API Service","version":"1.0"}
+
+(venv) theia:devops-capstone-project$ docker image ls
+                                    i Info →   U  In Use
+IMAGE           ID             DISK USAGE   CONTENT SIZE
+accounts:latest
+                2f9a54bb86df        205MB             0B
+postgres:alpine
+                bb46dc8bfad7        248MB             0B
+us.icr.io/sn-labs-zachary007/accounts:1
+                2f9a54bb86df        205MB             0B
+
+(venv) theia:devops-capstone-project$ oc get all -l app=accounts
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/accounts-848cc89899-btbsz   1/1     Running   0          2m38s
+pod/accounts-848cc89899-kwr4p   1/1     Running   0          2m38s
+pod/accounts-848cc89899-wxt72   1/1     Running   0          2m38s
+
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/accounts   ClusterIP   172.21.131.244   <none>        8080/TCP   2m26s
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/accounts   3/3     3            3           2m38s
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/accounts-848cc89899   3         3         3       2m38s
+
+NAME                                HOST/PORT                                                                                                                      PATH   SERVICES   PORT    TERMINATION   WILDCARD
+route.route.openshift.io/accounts   accounts-sn-labs-zachary007.labs-prod-openshift-san-a45631dc5778dc6371c67d206ba9ae5c-0000.us-east.containers.appdomain.cloud          accounts   <all>   edge          None
+(venv) theia:devops-capstone-project$ 
+
+tkn pipeline start cd-pipeline \
+    -p repo-url="https://github.com/$GITHUB_ACCOUNT/devops-capstone-project.git" \
+    -p branch="main" \
+    -w name=pipeline-workspace,claimName=pipelinerun-pvc \
+    -s pipeline \
+    --showlog
+
+#!/bin/bash
+set -e
+python -m pip install --upgrade pip wheel
+pip install -qr requirements.txt
+nosetests -v --with-spec --spec-color
+
+image-registry.openshift-image-registry.svc:5000/$SN_ICR_NAMESPACE/accounts:latest
+
+tkn pipeline start cd-pipeline \
+    -p repo-url="https://github.com/$GITHUB_ACCOUNT/devops-capstone-project.git" \
+    -p branch=dev-pipeline \
+    -p build-image=image-registry.openshift-image-registry.svc:5000/$SN_ICR_NAMESPACE/accounts:1 \
+    -w name=pipeline-workspace,claimName=pipelinerun-pvc \
+    -s pipeline \
+    --showlog
